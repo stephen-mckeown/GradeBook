@@ -17,6 +17,7 @@ namespace Grades
             book.AddGrade(75);
             
             GradeStatistics stats = book.ComputeStatistics();
+            WriteResult("Average", stats.AverageGrade);
 
             Console.WriteLine(stats.AverageGrade);
             Console.WriteLine(stats.HighestGrade);
@@ -24,5 +25,15 @@ namespace Grades
             Console.Read();
 
         }
+
+        static void WriteResult(string description, int result)
+        {
+            Console.WriteLine(description + ": " + result);
+        }
+        static void WriteResult(string description, float result)
+        {
+            Console.WriteLine(description + ": " + result);
+        }
+
     }
 }
