@@ -12,16 +12,19 @@ namespace Grades
         {
 
             GradeBook book = new GradeBook();
+            book.Name = null;
+            book.Name = "Stephen's Grade Book";
             book.AddGrade(91);
             book.AddGrade(89.9f);
             book.AddGrade(75);
             
             GradeStatistics stats = book.ComputeStatistics();
+            Console.WriteLine(book.Name);
             WriteResult("Average", stats.AverageGrade);
+            WriteResult("Highest", (int)stats.HighestGrade);
+            WriteResult("Lowest", stats.LowestGrade);
 
-            Console.WriteLine(stats.AverageGrade);
-            Console.WriteLine(stats.HighestGrade);
-            Console.WriteLine(stats.LowestGrade);
+            WriteResult("Params", stats.LowestGrade, 5,6,7);  //Params - can pass an array of variable length
             Console.Read();
 
         }
@@ -32,7 +35,12 @@ namespace Grades
         }
         static void WriteResult(string description, float result)
         {
-            Console.WriteLine(description + ": " + result);
+           // Console.WriteLine("{0}: {1:F2}", description, result);
+            Console.WriteLine($"{description}: {result:F2}");
+        }
+        static void WriteResult(string description, params float[] result)  //params - can receive an array of variable length
+        {
+            Console.WriteLine($"{description}: {result[2]}");
         }
 
     }
