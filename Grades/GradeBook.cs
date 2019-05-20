@@ -46,6 +46,6 @@ namespace Grades
         
         private string _name;
 
-        private List<float> grades = new List<float>();
+        protected List<float> grades = new List<float>();
     }
 }
