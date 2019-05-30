@@ -23,12 +23,17 @@ namespace Grades
             WriteResult("Average", stats.AverageGrade);
             WriteResult("Highest", (int)stats.HighestGrade);
             WriteResult("Lowest", stats.LowestGrade);
+            WriteResult("Grade", stats.LetterGrade);
 
             WriteResult("Params", stats.LowestGrade, 5,6,7);  //Params - can pass an array of variable length
             Console.Read();
 
         }
 
+        static void WriteResult(string description, string result)
+        {
+            Console.WriteLine(description + ": " + result);
+        }
         static void WriteResult(string description, int result)
         {
             Console.WriteLine(description + ": " + result);
