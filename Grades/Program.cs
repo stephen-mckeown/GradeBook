@@ -12,22 +12,37 @@ namespace Grades
         {
 
             GradeBook book = new GradeBook();
+
+            book.NameChanged += new NameChangedDelegate(OnNameChanged);  // Add methods to delegate with +=
+            book.NameChanged += OnNameChanged2;  // Can also be written like this.
+            //book.NameChanged = null;  NameChanged is an event.  Events can only add or subtract a subscriber.
+
             book.Name = null;
             book.Name = "Stephen's Grade Book";
             book.AddGrade(91);
             book.AddGrade(89.9f);
             book.AddGrade(75);
+            book.WriteGrades(Console.Out);
             
             GradeStatistics stats = book.ComputeStatistics();
             Console.WriteLine(book.Name);
             WriteResult("Average", stats.AverageGrade);
             WriteResult("Highest", (int)stats.HighestGrade);
             WriteResult("Lowest", stats.LowestGrade);
-            WriteResult("Grade", stats.LetterGrade);
+            WriteResult(stats.Description, stats.LetterGrade);
 
             WriteResult("Params", stats.LowestGrade, 5,6,7);  //Params - can pass an array of variable length
             Console.Read();
 
+        }
+
+        static void OnNameChanged(object sender, NameChangedEventArgs args)
+        {
+            Console.WriteLine($"Grade book changing name from {args.ExistingName} to {args.NewName}");
+        }
+        static void OnNameChanged2(object sender, NameChangedEventArgs args)
+        {
+            Console.WriteLine("***");
         }
 
         static void WriteResult(string description, string result)

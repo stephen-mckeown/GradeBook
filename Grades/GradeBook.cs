@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,11 @@ namespace Grades
 {
     public class GradeBook
     {
+        public GradeBook()
+        {
+            _name = "Empty";
+            grades = new List<float>();
+        }
 
         public GradeStatistics ComputeStatistics()
         {
@@ -23,6 +29,16 @@ namespace Grades
             stats.AverageGrade = sum / grades.Count;
             return stats;
         }
+
+        internal void WriteGrades(TextWriter destination)
+        {
+            for (int i = 0; i < grades.Count; i++)
+            {
+                destination.WriteLine(grades[i]);
+            }
+           
+        }
+
         public void AddGrade(float grade)
         {
             grades.Add(grade);
@@ -38,14 +54,22 @@ namespace Grades
             {
                 if (!String.IsNullOrEmpty(value))
                 {
+                    if (_name != value)
+                    {
+                        NameChangedEventArgs args = new NameChangedEventArgs();
+                        args.ExistingName = _name;
+                        args.NewName = value;
+
+                        NameChanged(this, args);  //this - everything available in this object
+                    }
                     _name = value;
                 }
             }
         }
 
+        public event NameChangedDelegate NameChanged;
         
         private string _name;
-
-        protected List<float> grades = new List<float>();
+        private List<float> grades;
     }
 }
