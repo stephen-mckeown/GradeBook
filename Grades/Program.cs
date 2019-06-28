@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,18 +23,23 @@ namespace Grades
             book.AddGrade(91);
             book.AddGrade(89.9f);
             book.AddGrade(75);
-            book.WriteGrades(Console.Out);
-            
+
+            StreamWriter outputFile = File.CreateText("grades.txt");
+            book.WriteGrades(outputFile);
+
+            WriteResults(book);
+        }
+
+        private static void WriteResults(GradeBook book)
+        {
             GradeStatistics stats = book.ComputeStatistics();
             Console.WriteLine(book.Name);
             WriteResult("Average", stats.AverageGrade);
-            WriteResult("Highest", (int)stats.HighestGrade);
+            WriteResult("Highest", (int) stats.HighestGrade);
             WriteResult("Lowest", stats.LowestGrade);
             WriteResult(stats.Description, stats.LetterGrade);
-
-            WriteResult("Params", stats.LowestGrade, 5,6,7);  //Params - can pass an array of variable length
+            WriteResult("Params", stats.LowestGrade, 5, 6, 7); //Params - can pass an array of variable length
             Console.Read();
-
         }
 
         static void OnNameChanged(object sender, NameChangedEventArgs args)

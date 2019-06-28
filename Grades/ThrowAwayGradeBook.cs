@@ -6,20 +6,22 @@ using System.Threading.Tasks;
 
 namespace Grades
 {
-    //public class ThrowAwayGradeBook : GradeBook
-    //{
-    //    public GradeStatistics ComputeStatistics()
-    //    {
+    public class Throwawaygradebook : GradeBook
+    {
+        public GradeStatistics ComputeStatistics()
+        {
 
-    //        float lowest = float.MaxValue;
-    //        foreach (float grade in grades)
-    //        {
-    //            lowest = Math.Min(grade, lowest);
-    //        }
+            Console.WriteLine("ThrowAwayGradeBook::ComputeStatistics");
 
-    //        grades.Remove(lowest);
+            float lowest = float.MaxValue;
+            foreach (float grade in grades)
+            {
+                lowest = Math.Min(grade, lowest);
+            }
 
-    //        return base.ComputeStatistics();
-    //    }
-    //}
+            grades.Remove(lowest);
+
+            return base.ComputeStatistics();
+        }
+    }
 }
