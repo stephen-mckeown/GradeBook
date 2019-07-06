@@ -13,8 +13,6 @@ namespace Grades
             LowestGrade = float.MaxValue;
             HighestGrade = 0;
         }
-
-
         public string Description
         {
             get
@@ -38,11 +36,9 @@ namespace Grades
                         result = "Failing";
                         break;
                 }
-
                 return result;
             }
         }
-
         public string LetterGrade
         {
             get
@@ -68,7 +64,6 @@ namespace Grades
                 {
                     result = "F";
                 }
-
                 return result;
             }
         }
@@ -76,6 +71,5 @@ namespace Grades
        public float AverageGrade;
        public float HighestGrade;
        public float LowestGrade;
-
     }
 }
