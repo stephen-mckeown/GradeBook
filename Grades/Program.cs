@@ -11,7 +11,7 @@ namespace Grades
     {
         static void Main(string[] args)
         {
-            GradeBook book = CreateGradeBook();
+            GradeTracker book = CreateGradeBook();
 
             book.NameChanged += new NameChangedDelegate(OnNameChanged);  // Add methods to delegate with +=
             book.NameChanged += OnNameChanged2;  // Can also be written like this.
@@ -30,14 +30,14 @@ namespace Grades
             return new Throwawaygradebook();
         }
 
-        private static void AddGrades(GradeBook book)
+        private static void AddGrades(GradeTracker book)
         {
             book.AddGrade(91);
             book.AddGrade(89.9f);
             book.AddGrade(75);
         }
 
-        private static void WriteResults(GradeBook book)
+        private static void WriteResults(GradeTracker book)
         {
             GradeStatistics stats = book.ComputeStatistics();
             Console.WriteLine(book.Name);

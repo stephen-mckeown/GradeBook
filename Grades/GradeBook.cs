@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Grades
+namespace Grades 
 {
-    public class GradeBook
+    public class GradeBook : GradeTracker
     {
         public GradeBook()
         {
@@ -15,7 +15,7 @@ namespace Grades
             grades = new List<float>();
         }
 
-        public virtual GradeStatistics ComputeStatistics()
+        public override GradeStatistics ComputeStatistics()   //"virtual" polymorphsum.
         {
             Console.WriteLine("GradeBook::ComputeStatistics");
 
@@ -32,7 +32,7 @@ namespace Grades
             return stats;
         }
 
-        internal void WriteGrades(TextWriter destination)
+        public override void WriteGrades(TextWriter destination)
         {
             for (int i = 0; i < grades.Count; i++)
             {
@@ -41,37 +41,11 @@ namespace Grades
            
         }
 
-        public void AddGrade(float grade)
+        public override void AddGrade(float grade)
         {
             grades.Add(grade);
         }
 
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                if (!String.IsNullOrEmpty(value))
-                {
-                    if (_name != value)
-                    {
-                        NameChangedEventArgs args = new NameChangedEventArgs();
-                        args.ExistingName = _name;
-                        args.NewName = value;
-
-                        NameChanged(this, args);  //this - everything available in this object
-                    }
-                    _name = value;
-                }
-            }
-        }
-
-        public event NameChangedDelegate NameChanged;
-        
-        private string _name;
         protected List<float> grades;
     }
 }
